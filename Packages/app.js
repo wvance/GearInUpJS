@@ -54,8 +54,24 @@
 	  		body:"Awesome Deal!",
 	  		author:"sab@example.com",
 	  		createdOn: 1397490980837
-	  	}
-	  ]
+	  	}]//,
+	  // prices: [
+	  // 	{
+	  // 		days: 1, 
+	  // 		ammount: 25
+	  // 	},{
+	  // 		days: 3,
+	  // 		ammount: 35
+	  // 	},{
+	  // 		days: 7, 
+	  // 		ammount: 45
+	  // 	},{
+	  // 		days: 14,
+	  // 		ammount: 50
+	  // 	},{
+	  // 		days: 30,
+	  // 		ammount 65
+	  // 	}]
   },
   {
   	name: 'GoPro HERO3: Black Edition',
@@ -83,8 +99,24 @@
 	  		body:"Awesome Deal2!",
 	  		author:"sab2@example.com",
 	  		createdOn: 1397490980837
-	  	}
-	  ]
+	  	}]//,
+	  // prices: [
+	  // 	{
+	  // 		days: 1, 
+	  // 		ammount: 25
+	  // 	},{
+	  // 		days: 3,
+	  // 		ammount: 35
+	  // 	},{
+	  // 		days: 7, 
+	  // 		ammount: 45
+	  // 	},{
+	  // 		days: 14,
+	  // 		ammount: 50
+	  // 	},{
+	  // 		days: 30,
+	  // 		ammount 65
+	  // 	}]
   }];
   
 })();
