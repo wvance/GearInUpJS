@@ -27,11 +27,11 @@
     };
   });
 
+
   var cameras = [
   { 
-  	name: 'Scuba Package', 
-  	price: 10, 
-  	description: "The perfect package for those going for an underwater adventure!",
+  	name: 'GoPro HERO3: Black Edition',  
+  	description: "Wearable and gear mountable, waterproof to 197' (60m), capable of capturing ultra-wide 1440p 48fps, 1080p 60 fps and 720p 120 fps video and 12MP photos at a rate of 30 photos per second, the HERO3: Black Edition is the world's most versatile camera.",
   	canPurchase: true,
   	soldOut: false,
   	images: [
@@ -57,26 +57,25 @@
 	  	}],
 	  prices: [
 	  	{
-	  		days: "1", 
-	  		ammount: "25"
+	  		days: "1 Day", 
+	  		ammount: 25
 	  	},{
-	  		days: "3",
-	  		ammount: "35"
+	  		days: "3 Days",
+	  		ammount: 35
 	  	},{
-	  		days: "7", 
-	  		ammount: "45"
+	  		days: "7 Days", 
+	  		ammount: 45
 	  	},{
-	  		days: "14",
-	  		ammount: "50"
+	  		days: "14 Days",
+	  		ammount: 50
 	  	},{
-	  		days: "30",
-	  		ammount: "65"
+	  		days: "30 Days",
+	  		ammount: 65
 	  	}]
   },
   {
-  	name: 'GoPro HERO3: Black Edition',
-  	price: 15,
-  	description: "This is the second product!",
+  	name: 'GoPro HD HERO2',
+  	description: "The HD HERO2 has stoked out more professional and amateur athletes, adventurers and filmmakers than any other camera in the world.",
   	canPurchase:true,
   	soldOut:false,
   	images: [
@@ -102,20 +101,20 @@
 	  	}],
 	  prices: [
 	  	{
-	  		days: "1", 
-	  		ammount: "15"
+	  		days: "1 Day", 
+	  		ammount: 15
 	  	},{
-	  		days: "3",
-	  		ammount: "25"
+	  		days: "3 Days",
+	  		ammount: 25
 	  	},{
-	  		days: "7", 
-	  		ammount: "35"
+	  		days: "7 Days", 
+	  		ammount: 35
 	  	},{
-	  		days: "14",
-	  		ammount: "40"
+	  		days: "14 Days",
+	  		ammount: 40
 	  	},{
-	  		days: "30",
-	  		ammount: "55"
+	  		days: "30 Days",
+	  		ammount: 55
 	  	}]
   }];
   
@@ -131,3 +130,44 @@ function submitCheckout() {
    document.getElementById('confirm').style.display = "block";
 
 }
+
+function ToggleReviewController($scope){
+	$scope.visible = false;
+
+	$scope.toggleReview = function(){
+		$scope.visible = !$scope.visible;
+	};
+}
+
+//Stripe function
+jQuery(function($) {
+  $('#payment-form').submit(function(event) {
+    var $form = $(this);
+
+    // Disable the submit button to prevent repeated clicks
+    $form.find('button').prop('disabled', true);
+
+    Stripe.card.createToken($form, stripeResponseHandler);
+
+    // Prevent the form from submitting with the default action
+    return false;
+  });
+});
+
+function stripeResponseHandler(status, response) {
+  var $form = $('#payment-form');
+
+  if (response.error) {
+    // Show the errors on the form
+    $form.find('.payment-errors').text(response.error.message);
+    $form.find('button').prop('disabled', false);
+  } else {
+    // response contains id and card, which contains additional card details
+    var token = response.id;
+    // Insert the token into the form so it gets submitted to the server
+    $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+    // and submit
+    $form.get(0).submit();
+  }
+};
+

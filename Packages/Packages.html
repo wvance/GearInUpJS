@@ -4,254 +4,333 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>GearInUp: Capture Your Adventures</title>
 
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="Packages.css"/>
     <link rel='stylesheet' media='screen and (max-width: 770px)' href='mobile.css' />
-  </head>
 
+  </head>
 
 	<body ng-controller="StoreController as store">
 		<div class="container">
-		<section ng-controller="PanelController as panel"> 
+			<section ng-controller="PanelController as panel"> 
 
-			<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			  <div class="container-fluid">
-			    <div class="navbar-header">
-			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-			        <span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			      </button>
-			      <a class="navbar-brand" ng-click="panel.selectTab(1)">GearInUp</a>
+				<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				  <div class="container-fluid">
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				      <a class="navbar-brand" ng-click="panel.selectTab(1)">GearInUp</a>
+				    </div>
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <ul class="nav navbar-nav">
+				      	<li ng-class="{active: panel.isSelected(2) }"> 
+									<a href ng-click="panel.selectTab(2)"><span class="glyphicon glyphicon-camera"></span> Packages </a>
+								</li>
+								<li ng-class="{active: panel.isSelected(3) }"> 
+									<a href ng-click="panel.selectTab(3)"><span class="glyphicon glyphicon-envelope"></span> Contact Us </a>
+								</li>
+							</ul>
+
+				      <form class="navbar-form navbar-left navbar-right" role="search">
+				        <div class="form-group">
+				          <input type="text" class="form-control" placeholder="Search">
+				        </div>
+				        <button type="submit" class="btn btn-default">Submit</button>
+				      </form>
+				    </div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+				</div>
+
+	      <video controls muted autoplay loop poster="images/kayak.png" id="bgvid">
+	        <source src="video/kayak.webm" type="video/webm">
+	        <source src="video/kayak.mp4" type="video/mp4">
+	      </video>
+			
+	<!-- THIS IS THE MAIN PAGE: SELECT 1 -->
+				<div class="panel welcome" ng-show="panel.isSelected(1)">
+					<div class="cover-container">
+						<div class="inner cover">
+			        <h1 class="cover-heading">Welcome to GearIn-Up!</h1>
+			        <p class="lead">
+			          GearIn-Up is your one stop shop for everything GoPro! Rent out a camera for a month long <span class="yellow">excursion</span>, or just a weekend <span class="yellow"> adventure</span>! Wherever the world may take you, we have a package ready to capture any <span class="Yellow"> journey</span>!
+			        </p>
+			        <p class="submit">
+			        <a href ng-click="panel.selectTab(2)" class="btn btn-lg btn-success">See Packages</a>
+			      	</p>
+			    	</div>
 			    </div>
-			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			      <ul class="nav navbar-nav">
-			      	<li ng-class="{active: panel.isSelected(2) }"> 
-								<a href ng-click="panel.selectTab(2)"><span class="glyphicon glyphicon-camera"></span> Packages </a>
-							</li>
-							<li ng-class="{active: panel.isSelected(3) }"> 
-								<a href ng-click="panel.selectTab(3)"><span class="glyphicon glyphicon-envelope"></span> Contact Us </a>
-							</li>
-						</ul>
+				</div>
 
-			      <form class="navbar-form navbar-left navbar-right" role="search">
-			        <div class="form-group">
-			          <input type="text" class="form-control" placeholder="Search">
-			        </div>
-			        <button type="submit" class="btn btn-default">Submit</button>
-			      </form>
-			    </div><!-- /.navbar-collapse -->
-			  </div><!-- /.container-fluid -->
-			</div>
+	<!-- THIS IS THE PRODUCTS PAGE: SELECT 2 -->
+				<div class="panel packages" ng-show="panel.isSelected(2)">
+					<div class="row">
+						<div class ="col-md-5">
+				  		<ul class="list-group">
+				   		 	<li class= "list-group-item" ng-repeat="product in store.products">
+				   		 		<div class= "display-image">
+										<img ng-src="{{product.images[0].full}}" class="img-rounded"/>
+									</div>
+									<hr>
+									<div class="priceTitle">
+						     		<h3> {{product.name}} </h3>
+					      	</div>
+					      	
+					      	<div class="itemDetails">
+					      	<section ng-controller="PanelController as panel"> 
+										<ul class="nav nav-pills black">
+										  <li ng-class="{active: panel.isSelected(1) }"> 
+										  	<a href ng-click="panel.selectTab(1)">Description </a>
+										  </li>
+										  <li ng-class="{active:panel.isSelected(2)}"> 
+										  	<a href ng-click="panel.selectTab(2)">Price</a>
+										  </li>
+										  <li ng-class="{active:panel.isSelected(3)}"> 
+										  	<a href ng-click="panel.selectTab(3)">Reviews</a>
+									  	</li>
+									  </ul>
+										<div class="panel description" ng-show="panel.isSelected(1)">
+							      	<p>{{product.description}}</p>
+						      	</div>
 
-      <video controls muted autoplay loop poster="images/kayak.png" id="bgvid">
-        <source src="video/kayak.webm" type="video/webm">
-        <source src="video/kayak.mp4" type="video/mp4">
-      </video>
-		
-<!-- THIS IS THE MAIN PAGE: SELECT 1 -->
-			<div class="panel welcome" ng-show="panel.isSelected(1)">
-				<div class="cover-container">
-					<div class="inner cover">
-		        <h1 class="cover-heading">Welcome to GearIn-Up!</h1>
-		        <p class="lead">
-		          GearIn-Up is your one stop shop for everything GoPro! Rent out a camera for a month long excursion, or just a weekend adventure! Where-ever the world may take you, we have a package ready to capture any journey!
-		        </p>
-		        <p class="submit">
-		        <a href ng-click="panel.selectTab(2)" class="btn btn-lg btn-success">See Packages</a>
-		      	</p>
-		    	</div>
-		    </div>
-			</div>
+						    		<div class="panel priceTable" ng-show="panel.isSelected(2)">
+						    			<table class = "center">
+												<tr>
+											    <th>Length</th>
+											    <th>Price</th>
+											  </tr>
+						    				<tr class="data" ng-repeat=" price in product.prices">
+						    					<td> {{price.days}}</td>
+						    					<td> ${{price.ammount}}</td>
+						    				</tr>
+						    			</table>
+							    		<h6> *Custom lengths are also possible</h6>
+						    		</div>
 
-<!-- THIS IS THE PRODUCTS PAGE: SELECT 2 -->
-		<div class="panel packages" ng-show="panel.isSelected(2)">
-			<div class="row">
-				<div class ="col-md-5">
-		  		<ul class="list-group">
-		   		 	<li class= "list-group-item" ng-repeat="product in store.products">
-		   		 		<div class= "display-image">
-								<img ng-src="{{product.images[0].full}}" class="img-rounded"/>
+						      	<div class="panel reviews" ng-show="panel.isSelected(3)">
+						      		<!-- Old Reviews Display -->
+						      		<blockquote ng-repeat="review in product.reviews">
+						      			<strong> {{review.stars}} Stars</strong>
+						      			{{review.body}}
+						      			<cite class="clearfix"> — {{review.author}} <br> {{review.createdOn | date}}</cite>
+						      		</blockquote>
+
+						      		<div ng-controller="ToggleReviewController">
+							      		<button type="submit" class="btn btn-default bt-sm" ng-click="toggleReview()">Add a Review</button>
+							      		<div class="ShowReview" ng-show="visible">
+								      		<!-- Live Preview -->
+								      		<!-- Form for New Reviews -->
+								      		<form role="form" name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate> 
+								      			<!-- Review Display -->
+								      			<hr>
+								      			<blockquote>
+								      				<strong>{{reviewCtrl.review.stars}} Stars</strong>
+								      				{{reviewCtrl.review.body}}
+								      				<cite class="clearfix"> — {{reviewCtrl.review.author}} <br> {{review.createdOn | date}}</cite>
+								      			</blockquote>
+
+								      			<!-- Review Rating -->
+								      			<fieldset class="form-group">
+									      			<label>Rating:</label>
+									      			<select class="form-control" ng-model="reviewCtrl.review.stars" required>
+									      				<option value="1">1 Star</option>
+									      				<option value="2">2 Stars</option>
+									      				<option value="3">3 Stars</option>
+									      				<option value="4">4 Stars</option>
+									      				<option value="5">5 Stars</option>
+									      			</select>
+									      		</fieldset>
+
+								      			<!-- Review Body -->
+								      			<fieldset class="form-group">
+									      			<label>Comments:</label>
+									      			<textarea class="form-control" ng-model="reviewCtrl.review.body" required></textarea><br>
+									      		</fieldset>
+
+								      			<!-- Author -->
+								      			<fieldset class="form-group">
+									      			<label>Email: </label>
+									      			<input class="form-control" ng-model="reviewCtrl.review.author" type= "email" required/>
+								      			</fieldset>
+								      			<div> reviewForm is {{reviewForm.$valid}} </div>
+								      			<fieldset class="form-group">
+								      				<input class="form-control" type="submit" value="Submit"/>
+								      			</fieldset>
+								      		</form>
+							      		</div>
+						      		</div>
+						     		</div>
+						     	</section>
+						     	</div>
+					      	<button class="btn btn-success checkout-buttons" ng-show = "product.canPurchase" onclick="checkout()"> 
+					      		<span class="glyphicon glyphicon-shopping-cart"></span>
+					      			Checkout 
+					      	</button><hr>
+				    		</li>
+				  		</ul>
+				  	</div>
+
+
+				  	<div id="checkout">
+					  	<div class = "col-md-6">
+								<form action="" method="POST" id="payment-form" class="form-horizontal" role="form">
+									<span class="payment-errors"></span>
+									<h3> Thanks for your interest! Please fill out this form and we will get you set up for your <span class="yellow">adventure!</span></h3>
+									<hr>
+									<div class="form-group">
+										<label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="inputFirstName" placeholder="John">
+										</div>
+										<label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="inputLastName" placeholder="Doe">
+										</div>
+									</div>
+
+								  <div class="form-group">
+								    <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+								    <div class="col-sm-10">
+								      <input type="text" class="form-control" id="inputPhoneNumber" placeholder="(123) 456-789">
+								    </div>
+								  </div>
+
+								  <div class="form-group">
+								    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+								    <div class="col-sm-10">
+								      <input type="email" class="form-control" id="inputEmail" placeholder="John.Doe@GearIn-Up.com">
+								    </div>
+								  </div>
+
+									<div class="form-group">
+									  <label for="inputPackage" class="col-sm-2 control-label">Package</label>
+									  <div class="col-sm-10">
+										  <select class="form-control">
+											  <option>Package 1 Example</option>
+											  <option>Package 2 Example</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+									  <label for="inputLength" class="col-sm-2 control-label">Length</label>
+									  <div class="col-sm-10">
+										  <select class="form-control">
+											  <option>1 Day</option>
+											  <option>3 Days</option>
+											  <option>5 Days</option>
+											  <option>7 Days</option>
+											  <option>14 Days</option>
+											  <option>30 Days</option>
+											</select>
+										</div>
+									</div>
+    
+
+								  <div class = "form-group">
+								  	<label for="AdditionalDetails" class ="col-sm-2 control-label">Trip Details</label>
+								  	<div class="col-sm-4">
+								  		<textarea class="form-control" id="inputTripDetails" placeholder="Tell us about your trip!" rows="5" ></textarea>
+								  	</div>
+
+								  	<div class="paymentInfo">
+									  	<label for="CardNumber" class ="col-sm-2 control-label">Card Num</label>
+									  	<div class="form-row col-sm-4">
+									      <label>
+									        <input type="text" size="20" class="form-control" id="inputCardNumber" placeholder="1234 5678 9012 3456" data-stripe="number"/>
+									      </label>
+										 	</div>
+
+											<label for="" class ="col-sm-2 control-label">Expiration</label>
+									    <div class="form-row col-sm-4">
+									      <label>
+									        <input type="text" class="form-control" id="inputMonth" placeholder="00" size="2" data-stripe="exp-month"/>
+									      </label>
+									      <span> / </span>
+									      <label>
+									      	<input type="text" size="2" class="form-control" id="inputYear" placeholder="0000" data-stripe="exp-year"/>
+									      </label>
+									    </div>
+
+									  	<label for="cardCVC" class ="col-sm-2 control-label">CVC</label>
+										  <div class="form-row col-sm-4">
+									      <label>
+									        <input type="text" size="2" class="form-control" id="inputCVC" placeholder="000" data-stripe="cvc"/>
+									      </label>
+										  </div>
+								  	</div>
+								  </div>
+
+									<div class="form-group">
+								    <div class="col-sm-offset-2 col-sm-10">
+								      <div class="checkbox pull-left">
+								        <label>
+								          <input type="checkbox"> Accept Terms & Conditions
+								        </label>
+								      </div>
+								    </div>
+								  </div>
+
+								  <div class="form-group">
+								    <div class="col-sm-offset-1 col-sm-12">
+								      <button type="submit" class="btn btn-success submitCheckout" onclick="submitCheckout()">Submit</button>
+								    </div>
+								  </div>
+								</form>
 							</div>
-							<hr>
-							<div class="priceTitle">
-				     		<h3> {{product.name}} </h3>
-			      	</div>
-			      	
-			      	<div class="itemDetails">
-			      	<section ng-controller="PanelController as panel"> 
-								<ul class="nav nav-pills">
-								  <li ng-class="{active: panel.isSelected(1) }"> 
-								  	<a href ng-click="panel.selectTab(1)">Description </a>
-								  </li>
-								  <li ng-class="{active:panel.isSelected(2)}"> 
-								  	<a href ng-click="panel.selectTab(2)">Price</a>
-								  </li>
-								  <li ng-class="{active:panel.isSelected(3)}"> 
-								  	<a href ng-click="panel.selectTab(3)">Reviews</a>
-							  	</li>
-							  </ul>
-								<div class="panel" ng-show="panel.isSelected(1)">
-					     		<h4>Description:</h4>
-					      	<p>{{product.description}}</p>
-				      	</div>
+						</div>
 
-				    		<div class="panel" ng-show="panel.isSelected(2)">
-				    			<table>
-				    				<tr ng-repeat=" price in product.prices">
-				    					<td> {{price.days}}</td>
-				    					<td> {{price.ammount}}</td>
-				    				</tr>
-				    			</table>
-						    	<h6> Custom lengths are also possible</h6>
-				    		</div>
+						<div id="confirm">
+							<h2> THANK YOU FOR YOUR ORDER!</h3>
+							<h4> You will receive a confirmation e-mail with your order information shortly</h4>
+							<h4> If you have any questions feel free to <a href="" ng-click="panel.selectTab(3)"><span class="yellow">Contact Us</span></a></h4>
+						</div>
+				  </div>
+				</div>
 
-
-				      	<div class="panel" ng-show="panel.isSelected(3)">
-				      		<!-- Old Reviews Display -->
-				      		<blockquote ng-repeat="review in product.reviews">
-				      			<strong> {{review.stars}} Stars</strong>
-				      			{{review.body}}
-				      			<cite class="clearfix"> — {{review.author}} <br> {{review.createdOn | date}}</cite>
-				      		</blockquote>
-
-				      		<!-- Live Preview -->
-				      		<!-- Form for New Reviews -->
-				      		<form role="form" name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate> 
-				      			<!-- Review Display -->
-				      			<blockquote>
-				      				<strong>{{reviewCtrl.review.stars}} Stars</strong>
-				      				{{reviewCtrl.review.body}}
-				      				<cite class="clearfix"> — {{reviewCtrl.review.author}} <br> {{review.createdOn | date}}</cite>
-				      			</blockquote>
-
-				      			<!-- Review Rating -->
-				      			<fieldset class="form-group">
-					      			<label>Rating:</label>
-					      			<select class="form-control" ng-model="reviewCtrl.review.stars" required>
-					      				<option value="1">1 Star</option>
-					      				<option value="2">2 Stars</option>
-					      				<option value="3">3 Stars</option>
-					      				<option value="4">4 Stars</option>
-					      				<option value="5">5 Stars</option>
-					      			</select>
-					      		</fieldset>
-
-				      			<!-- Review Body -->
-				      			<fieldset class="form-group">
-					      			<label>Comments:</label>
-					      			<textarea class="form-control" ng-model="reviewCtrl.review.body" required></textarea><br>
-					      		</fieldset>
-
-				      			<!-- Author -->
-				      			<fieldset class="form-group">
-					      			<label>Email: </label>
-					      			<input class="form-control" ng-model="reviewCtrl.review.author" type= "email" required/>
-				      			</fieldset>
-				      			<div> reviewForm is {{reviewForm.$valid}} </div>
-				      			<fieldset class="form-group">
-				      				<input class="form-control" type="submit" value="Submit"/>
-				      			</fieldset>
-				      		</form>
-				     		</div>
-				     	</section>
-				     	</div>
-			      	<button class="btn btn-success" ng-show = "product.canPurchase" onclick="checkout()"> 
-			      		<span class="glyphicon glyphicon-shopping-cart"></span>
-			      			Checkout 
-			      	</button><hr>
-		    		</li>
-		  		</ul>
-		  	</div>
-
-
-		  	<div id="checkout">
-			  	<div class = "col-md-6">
-						<form class="form-horizontal" role="form">
-
-							<h3> Thanks for your interest! Please fill out this form and we will get you set up for your adventure!</h3>
-							<hr>
-							<div class="form-group">
-						    <label for="inputFirstName" class="col-sm-3 control-label">First Name</label>
-						    <div class="col-sm-9">
-						      <input type="text" class="form-control" id="inputFirstName" placeholder="John">
-						    </div>
-						  </div>
-
-							<div class="form-group">
-						    <label for="inputEmail3" class="col-sm-3 control-label">Last Name</label>
-						    <div class="col-sm-9">
-						      <input type="text" class="form-control" id="inputLastName" placeholder="Doe">
-						    </div>
-						  </div>
-
-						  <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-3 control-label">Phone Number</label>
-						    <div class="col-sm-9">
-						      <input type="text" class="form-control" id="inputPhoneNumber" placeholder="(123) 456-789">
-						    </div>
-						  </div>
-
-						  <div class="form-group">
-						    <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-						    <div class="col-sm-9">
-						      <input type="email" class="form-control" id="inputEmail" placeholder="John.Doe@GearIn-Up.com">
-						    </div>
-						  </div>
-
-						  <div class = "form-group">
-						  	<label for="Additional Details" class ="col-sm-3 control-label">Additional Details</label>
-						  	<div class="col-sm-9">
-						  		<textarea class="form-control" rows="3" ></textarea>
-						  	</div>
-						  </div>
-
-						  <div class="form-group">
-						    <div class="col-sm-offset-3 col-sm-9">
-						      <button type="submit" class="btn btn-default" onclick="submitCheckout()">Submit</button>
-						    </div>
-						  </div>
-
+	<!-- THIS IS SECTION 3 -->
+				<div class="panel contact" ng-show="panel.isSelected(3)">
+					<div class="col-sm-9">
+						<h1>Got a question?</h1>
+						<h4>No problem, fill out the form below and we will get back to you! </h4>
+						<form role="form" name="reviewForm">
+							
 						</form>
+					</div>
+					<div class="easyContact col-sm-3">
+						<h2> <span class="yellow">Contact Us</span></h2> <hr>
+						<h3> Phone:</h3> <h4>336.549.5879</h4>
+						<h3> Email:</h3> <h4> wesley.vance@GearIn-Up.com</h4>
+						<h3> Address: </h3> <h4> 1111 Technology Ave College Station, TX</h4>
 					</div>
 				</div>
 
-				<div id="confirm">
-					<h3> THANK YOU FOR YOUR ORDER!</h3>
-				</div>
 
-		  </div>
+	<!-- FOOTER SECTION -->
+		    <div class="cover-container">
+		      <div class="mastfoot">
+		        <div class="inner">
+		          <span class="glyphicon glyphicon-copyright-mark"></span> <a href="http://wesvance.com">Wesley Vance</a>: <a href = "" ng-click="panel.selectTab(3)">Contact Us</a></p>
+		        </div>
+		      </div>
+		    </div>
+<!-- End Footer -->
+		  </section>
 		</div>
-
-<!-- THIS IS SECTION 3 -->
-			<div class="panel contact" ng-show="panel.isSelected(3)">
-				<h1>Got a question?</h1>
-				<h4>No problem, fill out the form below and we will get back to you! </h4>
-				<form role="form" name="reviewForm">
-					
-				</form>
-			</div>
-
-
-<!-- FOOTER SECTION -->
-	    <div class="cover-container">
-	      <div class="mastfoot">
-	        <div class="inner">
-	          <span class="glyphicon glyphicon-copyright-mark"></span> <a href="http://wesvance.com">Wesley Vance</a>: <a href = "" ng-click="panel.selectTab(3)">Contact Us</a></p>
-	        </div>
-	      </div>
-	    </div>
-	  </section>
-	</div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../angular/angular.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-    
   </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../angular/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script> 
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+		  // This identifies your website in the createToken call below
+		  Stripe.setPublishableKey('pk_test_QRQCdxp4Q8Q0VrDJjuFq2TXs'); //TEST TOKEN, CHANGE FOR PRODUCTION LATER
+		  // ...
+		</script>
 </html>
